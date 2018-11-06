@@ -1,0 +1,23 @@
+{
+  "name": "Node_smart_contract",
+  "version": "1.0.0",
+  "description": "Custom Node Project - Smart contract creation, local testing, deployment to Rinkeby Ethereum test network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CharlesGrogan/Node_smart_contract.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CharlesGrogan/Node_smart_contract/issues"
+  },
+  "homepage": "https://github.com/CharlesGrogan/Node_smart_contract#readme",
+  "dependencies": {
+    "solc": "^0.4.25"
+  }
+}
