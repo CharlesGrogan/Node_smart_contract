@@ -4,7 +4,7 @@
   "description": "Custom Node Project - Smart contract creation, local testing, deployment to Rinkeby Ethereum test network",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/CharlesGrogan/Node_smart_contract#readme",
   "dependencies": {
-    "solc": "^0.4.25"
+    "chai": "^4.2.0",
+    "ganache-cli": "^6.1.8",
+    "mocha": "^5.2.0",
+    "solc": "^0.4.25",
+    "web3": "^1.0.0-beta.36"
   }
 }
