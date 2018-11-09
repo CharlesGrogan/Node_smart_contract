@@ -4,9 +4,10 @@ const Web3 = require("web3"); // This imports the Constructor Web3
 const web3 = new Web3(ganache.provider()); // This creates the instance of web3 - attempt to local test network
 const { interface, bytecode } = require("../compile");
 
-const init_str = "Blockchain rules!";
 let accounts;
 let inbox;
+const init_str = "Blockchain rules!";
+const second_str = "I am the second string";
 
 beforeEach(async () => {
   // Get a list of all accounts - solely for dev purposes - retrieves 10 test accounts
@@ -27,5 +28,11 @@ describe("Inbox", () => {
   it("has a default message", async () => {
     const message = await inbox.methods.message().call(); // inbox == to copy of contract on blockchain; methods = object that contains all public fn on contract; message == to the fn being called in the () put any fn arguements; call() is used to customize the transaction your attempting to send out
     assert.equal(message, init_str);
+  });
+
+  it("can change the message", async () => {
+    await inbox.methods.setMessage(second_str).send({ from: accounts[0] });
+    const message = await inbox.methods.message().call();
+    assert.equal(message, second_str);
   });
 });
