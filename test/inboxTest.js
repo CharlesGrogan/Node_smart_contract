@@ -4,6 +4,7 @@ const Web3 = require("web3"); // This imports the Constructor Web3
 const web3 = new Web3(ganache.provider()); // This creates the instance of web3 - attempt to local test network
 const { interface, bytecode } = require("../compile");
 
+const init_str = "Blockchain rules!";
 let accounts;
 let inbox;
 
@@ -13,13 +14,18 @@ beforeEach(async () => {
 
   // Use one of those accounts to deploy
   // the contract
-  inbox = await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({ data: bytecode, arguments: ["Hi there!"] })
-    .send({ from: accounts[0], gas: "1000000" });
+  inbox = await new web3.eth.Contract(JSON.parse(interface)) // teaches web3 about what methods an inbox contract has
+    .deploy({ data: bytecode, arguments: [init_str] }) // tells web3 that we want to deploy a new copy of this contract
+    .send({ from: accounts[0], gas: "1000000" }); // instructs web3 to send out a transaction that creates this contract
 });
 
 describe("Inbox", () => {
   it("deploys a contract", () => {
-    console.log(inbox);
+    assert.ok(inbox.options.address);
+  });
+
+  it("has a default message", async () => {
+    const message = await inbox.methods.message().call(); // inbox == to copy of contract on blockchain; methods = object that contains all public fn on contract; message == to the fn being called in the () put any fn arguements; call() is used to customize the transaction your attempting to send out
+    assert.equal(message, init_str);
   });
 });
